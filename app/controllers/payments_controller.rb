@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
 
 # order = Razorpay::Order.create amount: 50000, currency: 'INR', receipt: 'TEST'
     def create_payment
-        amount = params[:amount] # Amount in paise (10 rupees)
+        amount = params[:amount]
         order = Razorpay::Order.create(amount: amount, currency: 'INR')
         render json: order
     end
@@ -13,8 +13,6 @@ class PaymentsController < ApplicationController
     def confirm_payment
         payment_id = params[:payment_id]
         razorpay_payment = Razorpay::Payment.fetch(payment_id)
-        # Verify and process the payment
-        # Update your database or grant access to the paid content
         render json: { message: 'Payment confirmed' }
     end
 end
