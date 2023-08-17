@@ -1,4 +1,9 @@
 class ArticlesController < ApplicationController
+    def top_posts
+        @top_posts = Article.order(post_likes: :desc, post_comments: :desc).limit(5)
+    
+        render json: @top_posts, status: :ok
+    end
     before_action :authenticate_user!
     def home
         @articles = Article.all
@@ -85,11 +90,6 @@ class ArticlesController < ApplicationController
         render json: @recommended_posts, status: :ok
     end
 
-    def top_posts
-        @top_posts = Article.order(post_likes: :desc, post_comments: :desc).limit(5)
-
-        render json: @top_posts, status: :ok
-    end
 
     def articles_by_topic
         @articles = Article.where(topic: params[:topic])
