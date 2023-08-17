@@ -1,57 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
-
+import React, {useState, useEffect} from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css";
+import HomePage from "./components/Pages/HomePage";
+import BlogPage from "./components/BlogPage/BlogPage";
+import LandingPage from "./components/LandingPage/index.js";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import ProfilePage from "./components/Profile/Profile";
+import OtherProfilePage from "./components/Profile/OtherProfile";
+import PostDetailPage from "./components/BlogPage/PostDetails";
+import PaymentPage from "./components/Payment/PaymentPage";
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/write/:draftId" element={<BlogPage />} /> */}
+        <Route path="/write" element={<BlogPage />} />
+        <Route path="/getting-started" element={<LandingPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/post/:postId" element={<PostDetailPage /> } />
+        <Route path="/profileDetail/:userId" element={<OtherProfilePage /> } />
+        <Route path="/payment" element={<PaymentPage /> } />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
